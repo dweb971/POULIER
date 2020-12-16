@@ -2,11 +2,53 @@
 
 body{
    width: auto;
+  background-color:grey;
+}
+.violet {
+  background-color: violet;
+}
+.text{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
 }
 .gras{
     font-weight: 400px;
 }
-.table{
+.Atable{
+    margin-top: 30px;
+    width: 350px;
+    height: 250px;
+}
+h1{
+    font-weight: bold
+}  
+.gras{
+    font-weight: bold;
+}
+.rouge{
+    margin-top: 30px;
+    background-color: red; 
+    background-size: 150px;
+    border-bottom-right-radius: 180px;
+}
+.sign{
+    width: 145px;
+    height: 25px;
+}
+.jaune{
     width: 250px;
     height: 150px;
+}
+.paie{
+   font-size: 15px; 
+}
+
+
+/*Footer*/
+footer{
+    display: block;
+    margin-bottom: 50px;
+    font-size: 15px;
 }

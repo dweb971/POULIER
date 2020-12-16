@@ -1,0 +1,12 @@
+/* Feuiller de style */
+
+body{
+   width: auto;
+}
+.gras{
+    font-weight: 400px;
+}
+.table{
+    width: 250px;
+    height: 150px;
+}

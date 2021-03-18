@@ -112,6 +112,8 @@
                             <label class="custom-control-label" for="customRadio1">I do accept the <a
                                     href="http://">Terms and Conditions</a> of your site. </label>
                         </div>
+
+                        <button class="btn btn-primary" type="submit">Register Badge</button>
                 </form>
             </div>
         </div>

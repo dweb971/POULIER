@@ -1,0 +1,61 @@
+body{
+    width: auto;
+
+}
+
+h1{
+    text-align: center;
+}
+#iden{
+    margin-bottom: 15px;
+}
+
+.sen{
+width: 150px;
+margin-top: 130px;
+}
+
+.dra{
+    width: 150px;
+    margin-top: 130px;
+}
+
+.formul{
+
+    display: block;
+    margin-left: 480px;
+}
+
+.mdp{
+    margin-top: 15px;
+}
+
+.bout{
+    display: block;
+    text-align: center;
+margin-top: 35px;
+}
+
+footer{
+    text-align: center;
+}
+
+/* exercice */
+
+.bouton2{
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+}
+
+td{
+    border: 1px solid black;
+}
+table{
+    border-collapse: collapse;
+    display: block;
+    text-align: center;
+    margin-left: 225px;
+    margin-top: 90px;
+    
+}

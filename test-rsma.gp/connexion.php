@@ -30,10 +30,10 @@
     <div class="container formul">
         <div class="row">
             <div class="col-12">
-                <form method="POST" action='<?php echo "https://".$_SERVER["HTTP_HOST"]."/traitement.php";?>'>
+                <form method="POST" action='<?php echo "https://".$_SERVER["HTTP_HOST"]."/traitement.php";?>' novalidate>
                     
                     <div class="col-sm-3">                      
-                      <input type="email" class="form-control" id="iden" aria-describedby="emailHelp" name="" value="" placeholder="Identifiant" required>
+                      <input type="email" class="form-control" id="iden" aria-describedby="emailHelp" name="" value="" placeholder="Identifiant"  required>
                       <div class="valid-feedback">
                 Merci!
             </div>
@@ -49,8 +49,6 @@
                     <div class="form-group form-check mdp">
                      <a href="http://">Mot de passe oublié ?</a>
                     </div>
-                    
-                    <p>Vous n'avez pas de compte ? <a href="http://">S'inscrire</a></p>
 
                   </form>
             </div>

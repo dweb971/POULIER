@@ -39,20 +39,16 @@
                             </tr>
                             <tr>
                            
-                                <td><button type="button" class="btn
+                                <td><button type="button" class="bouton"  class="btn
                                     btn-primary"><a href="themefrancais.php">CRÉER
                                     VOS EXERCICES</a></button></td>
                                   
-                                <td><button type="button" class="btn
+                                <td><button type="button" class="bouton" class="btn
                                     btn-primary"><a href="thememath.php">CRÉER
                                     VOS EXERCICES</a> </button></td>
                                 
                             </tr>
-                            <tr>
-                                <td>liens(les bonnes reponses de mon exercices crée)</td>
-                                <td>liens(les bonnes reponses de mon exercices crée) </td>
-                                
-                            </tr>
+                            
                         </table>
                     </div>
                 </div>

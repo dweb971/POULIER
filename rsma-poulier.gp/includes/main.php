@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="nom" class="col-sm-2 col-form-label">Nom : <span class="obj">(*)</span></label>
+                    <label for="nom" class="col-md-2 col-form-label">Nom : <span class="obj">(*)</span></label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="" value="" placeholder="NOM" name="nomFrm"
                             maxlength="100" minlength="1" required>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="prenom" class="col-sm-2 col-form-label">Prénom : <span class="obj">(*)</span></label>
+                    <label for="prenom" class="col-md-2 col-form-label">Prénom : <span class="obj">(*)</span></label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="" value="" placeholder="Prénom" name="prenomFrm"
                             maxlength="55" minlength="2" required>
@@ -46,7 +46,7 @@
                 <div class="form-group row">
                     <label for="telephone" class="col-sm-2 col-form-label">Téléphone : <span
                             class="obj">(*)</span></label>
-                    <div class="col-sm-10">
+                    <div class="col-md-10">
                         <input type="text" class="form-control" id="" value="" placeholder="Fixe ou Mobile"
                             maxlength="15" name="telFrm" required pattern="[0-9]{10}">
                         <p>Format : 0590010203 ou 0690010203</p>
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Email : <span
+                    <label for="staticEmail" class="col-md-2 col-form-label">Email : <span
                             class="obj">(*)</span></label>
                     <div class="col-sm-10">
                         <input type="email" class="form-control" id="emailFrm" maxlength="160" minlength="7" value=""

@@ -16,7 +16,7 @@ try {
     echo $e->getMessage(), "\n";
 }
 
-    // traitement formulaire rdv
-    $user = new utilisateur($db);
+    // traitement formulaire 
+    $user = new utilisateur();
     $user->formulaire($_POST);
 

@@ -4,7 +4,7 @@
             <div class="col-4">
 
             </div>
-            <form action='<?php echo "https://".$_SERVER["HTTP_HOST"]."/traitement.php";?>' method="POST"></form>
+            <form method="POST" action='<?php echo "https://".$_SERVER["HTTP_HOST"]."/traitement.php";?>' class="needs-validation" novalidate  >
             <div class="col-4">
                 <div class="form-group row">
                     <select class="custom-select" name="civFrm" required>

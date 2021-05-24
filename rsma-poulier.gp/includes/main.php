@@ -156,7 +156,7 @@
 
                 <div class="form-group row">
                     <p>Champ obligatoire (*)</p>
-                    <button type="submit" class="btn btn-primary" name="validerFrm" value="valider">Valider</button>
+                    <button type="submit" class="btn btn-primary" name="validerFrm" value="valider"> <a href="ajouter_salarier.php"></a> Valider</button>
                 </div>
                 </form>
 

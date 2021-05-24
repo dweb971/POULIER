@@ -28,15 +28,15 @@ public function formulaire(array $data){
 
     // affectation des donnees
 
-    $this->set_civilite($this->nettoyer($date["civFrm"]));
+    $this->set_civilite($this->nettoyer($data["civFrm"]));
     $this->set_nom(strtoupper($this->nettoyer($data["nomFrm"])));
     $this->set_prenom(ucfirst($this->nettoyer($data["prenomFrm"])));
-    $this->set_tel($this->nettoyer($data["telFrm"]));
+    $this->set_telephone($this->nettoyer($data["telFrm"]));
     $this->set_email(strtolower($this->nettoyer($data["emailFrm"])));
     $this->set_motdepasse($this->nettoyer($data["motdepasse"]));
     $this->set_adresse($this->nettoyer($data["adresse"]));
     $this->set_complementaire($this->nettoyer($data["complementaire"]));
-    $this->set_postal($this->nettoyer($data["postal"]));
+    $this->set_codepostal($this->nettoyer($data["postal"]));
     $this->set_pays($this->nettoyer($data["pays"]));
 
 }
@@ -44,7 +44,7 @@ public function formulaire(array $data){
 
 public function insert_data(){
 
-    if( preg_match('/[0-9]+/', $this->get_tel() ) == true ){
+    if( preg_match('/[0-9]+/', $this->get_telephone() ) == true ){
         
         return $this->get_tel();
 

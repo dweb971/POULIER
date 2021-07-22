@@ -9,41 +9,32 @@ spl_autoload_register(function ($name) {
 
 try {
    // instanciation des classes
-   include("scripts/Connect.php");
-   include("scripts/Patient.php");
-
+   include("../scripts/Connect.php");
+   include("../scripts/Patient.php");
+   include("classes/Backend.php");
+   
+   
    // creation obj PDO
    $db = new Connect();
 
    # classe Patient
    $patient = new Patient($db);
-
+   $back = new Backend($db);
 
 } catch (Exception $e) {
     echo $e->getMessage(), "\n";
 }
 
+#recup name for login(connexion)
+$form = isset($_POST["form"]) ? $_POST["form"] : "";
 
-# condition ternaire
-$action = isset($_POST['action']) ? $_POST["action"]: '';
-
-switch ($action) {
-    case 'rdv':
-        // traitement formulaire rdv
-        $patient->prise_rdv($_POST);    
+switch ($form) {
+    case 'login':
+        # verif email
+        $back->login($_POST);
         break;
     
     default:
         # code...
         break;
-}
-
-# test si jour et heure deja pris
-if( isset($_POST["rdvFrm"], $_POST["heureFrm"]) ){
-
-    $date = $_POST["rdvFrm"];
-    $heure = $_POST["heureFrm"];
-
-    $patient->cherche_date_heure($date, $heure);
-
 }

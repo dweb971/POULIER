@@ -13,84 +13,129 @@ class Patient
     private $_email;
     private $_visite;  // raison de la visite
     private $_patient; // patient du cabinet
-    private $_DBConnect; 
+
+    private $_DBConnect;
 
 
 
 
     // methodes
     public function __construct($connectOBJ){
+
+        
        // instance PDO
-              
-    $this->set_DBConnect($connectOBJ->pdo);
-
-
-
-
-
-
+       $this->set_DBConnect($connectOBJ->pdo);
+        
     }
 
 
-    public function prise_rdv(array $data){
+    public function prise_rdv(array $data)
+    {
+        //print_r($this->get_DBConnect());
 
-       
+        // affectation donnees
+        $this->set_civilite($this->nettoyer($data["civFrm"]));
+        $this->set_prenom(ucfirst($this->nettoyer($data["prenomFrm"])));
+        $this->set_nom(strtoupper($this->nettoyer($data["nomFrm"])));
+        $this->set_tel($this->nettoyer($data["telFrm"]));
+        $this->set_email(strtolower($this->nettoyer($data["emailFrm"])));
+        $this->set_visite($this->nettoyer($data["visiteFrm"]));
 
-         // affectation donnees
-         $this->set_civilite($this->nettoyer($data["civFrm"]));
-         $this->set_prenom(ucfirst($this->nettoyer($data["prenomFrm"])));
-         $this->set_nom(strtoupper($this->nettoyer($data["nomFrm"])));
-         $this->set_tel($this->nettoyer($data["telFrm"]));
-         $this->set_email(strtolower($this->nettoyer($data["emailFrm"])));
-         $this->set_visite($this->nettoyer($data["visiteFrm"]));
-         
-         #test patient cabinet o/n
-         if (!isset($data["patientFrm"])) {
-             $this->set_patient(0);
-         }
-         else{
-          $this->set_patient($this->nettoyer($data["patientFrm"]));  
-         } #end
+        # test patient cabinet o/n
+        if( !isset($data["patientFrm"]) ){
+            $this->set_patient(0);
+        } else {
+            $this->set_patient($this->nettoyer($data["patientFrm"]));
+        } # end $data["patientFrm"]
 
-         
-         $this->set_daterdv($this->nettoyer($data["rdvFrm"]));
-         $this->set_heure($this->nettoyer($data["heureFrm"]));
- 
-         // test sur telephone
-         //echo $this->insert_data();
-        $dates= date("Y-m-d H:i:s");
-        // requet insert
-        $requete = "INSERT INTO patient (civilite, nom, prenom, telephone, email, dateAdd, dateUpdate )
-        VALUES ('".$this->get_civilite()."','".$this->get_nom()."', '".$this->get_prenom()."', '".$this->get_tel()."', '".$this->get_email()."', '".$dates."', '".$dates."')";
+        $this->set_daterdv($this->nettoyer($data["rdvFrm"]));
+        $this->set_heure($this->nettoyer($data["heureFrm"]));
 
-        $dbh = $this->get_DBConnect()->query($requete);
+        // test sur telephone
+        //echo $this->insert_data();
+        $dates = date("Y-m-d H:i:s");
 
-        $idPatient = $this->get_DBConnect()->lastInsertId();
+        # test si patient existe deja
+        $reqSP = "SELECT id, nom, prenom FROM patient 
+        WHERE nom = '".$this->get_nom()."' AND prenom = '".$this->get_prenom()."' ";
 
-        if (isset($idPatient)) {
-           #insert rdv
-           $reqIR="INSERT INTO rendez_vous (idPatient, visite, patient, date_rdv, heure_rdv, dateAdd, dateUpdate )
-           VALUES ('".$idPatient."','".$this->get_visite()."', '".$this->get_patient()."', '".$this->get_daterdv()."', '".$this->get_heure()."', '".$dates."', '".$dates."')";
+        $req = $this->get_DBConnect()->prepare($reqSP);
+        $req->execute();
 
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+
+        if( $req->rowCount() != 0 ){
+
+            $idPatient = $result["id"];
+
+            $reqIR = "INSERT INTO rendez_vous (idPatient, visite, patient, date_rdv, heure_rdv, dateAdd, dateUpdate) 
+            VALUES ('".$idPatient."', '".$this->get_visite()."', '".$this->get_patient()."', 
+            '".$this->get_daterdv()."', '".$this->get_heure()."', '".$dates."', '".$dates."')"; # requete insert rendez_vous
 
             $dbh = $this->get_DBConnect()->query($reqIR);
 
-            print_r($dbh);
+            print_r($reqIR);
 
-        }
+
+        } else {
+
+            // requet insert
+        $reqIP = "INSERT INTO patient (civilite, nom, prenom, telephone, email, dateAdd, dateUpdate) 
+        VALUES ('".$this->get_civilite()."', '".$this->get_nom()."', '".$this->get_prenom()."', '".$this->get_tel()."',
+        '".$this->get_email()."', '".$dates."', '".$dates."')";     # requete insert patient
+
+
+        $dbh = $this->get_DBConnect()->query($reqIP);
+            $idPatient = $this->get_DBConnect()->lastInsertId() ;
+
+            if (isset($idPatient)) {
+                # insert rdv
+            $reqIR = "INSERT INTO rendez_vous (idPatient, visite, patient, date_rdv, heure_rdv, dateAdd, dateUpdate) 
+            VALUES ('".$idPatient."', '".$this->get_visite()."', '".$this->get_patient()."', 
+            '".$this->get_daterdv()."', '".$this->get_heure()."', '".$dates."', '".$dates."')"; # requete insert rendez_vous
+
+            $dbh = $this->get_DBConnect()->query($reqIR);
+
+                print_r($reqIR);
+            } else {
+                echo "erreur select idppatient";
+            } # end $idpatient
         
-        else{
-            echo"erreur select idpatient";
+            print_r($idPatient);
+       
 
+        } # end rowCount
+
+
+    }
+
+    public function cherche_date_heure($date, $heure)
+    {
+        // affiche date/heure
+        // echo "le rdv est pour le $date à $heure.";
+
+        # cherche date/heure dans table rendez_vous
+        $requete = "SELECT date_rdv, heure_rdv FROM rendez_vous 
+        WHERE date_rdv = '".$date."' AND heure_rdv = '".$heure."'";
+
+        $reqSD = $this->get_DBConnect()->prepare($requete);
+        $resultat = $reqSD->execute();
+
+        # si 1 resultat
+        if($reqSD->rowCount() != 0){
+            
+            # date pas disponible
+            echo "<p>Rendez-vous impossible, choisir une autre date ou une autre heure!</p>";
         }
 
-        print_r($idPatient);
 
-       
     }
 
 
-    public function insert_data(){
+
+
+    public function insert_data($pdo){
+
 
         if( preg_match('/[0-9]+/', $this->get_tel() ) == true ){
             
@@ -103,10 +148,8 @@ class Patient
 
     public function nettoyer($chaine){
 
-        // 
+        // securite
         $chaine = trim(strip_tags($chaine));
-
-
         return $chaine;
 
     }

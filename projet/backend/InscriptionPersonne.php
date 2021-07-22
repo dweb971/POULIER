@@ -1,4 +1,6 @@
 <?php 
+ require 'vendor/autoload.php';
+use \Mailjet\Resources;
 class InscriptionPersonne{
 
     // déclaration d'une propriété 
@@ -66,15 +68,45 @@ public function envoyer_mail(){
           $this->message = wordwrap($this->message, 70, "\r\n");
   
           // Envoi du mail
-          if( mail($this->email, 'Mon Sujet', $this->message) === true ){
+      /*    if( mail($this->email, 'Mon Sujet', $this->message) === true ){
               echo "Email envoyé à $this->email" ;
   
           } else {
               echo "Echec envoi email à $this->email";
   
-          }
-  
-      }
+          }*/
+          $mj = new \Mailjet\Client('43a0e903af851f7c1707c6b4d63176dc','ab173ac7503d96d437ce708d45ea072f',true,['version' => 'v3.1']);
+          $body = [
+            'Messages' => [
+              [
+                'From' => [
+                  'Email' => "webcontact@opti-web.fr",
+                  'Name' => "Melanie POULIER"
+                ],
+                'To' => [
+                  [
+                    'Email' => "$this->email",
+                    'Name' => "$this->nom $this->prenom"
+                  ]
+                ],
+                'Subject' => "Bienvenue $this->nom $this->prenom.",
+                'TextPart' => "$this->message",
+                'HTMLPart' => "<p>$this->message</p>",
+                'CustomID' => "AppGettingStartedTest"
+              ]
+            ]
+          ];
+
+          $response = $mj->post(Resources::$Email, ['body' => $body]);
+          if( $response->success() === true ){
+            echo "Email envoyé à $this->email avec Mailjet." ;
+
+        } else {
+            echo "Echec envoi email à $this->email";
+
+        }
+
+        }
 // GETTER / SETTER
 
     /**

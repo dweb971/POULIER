@@ -21,4 +21,15 @@ $inscription = new InscriptionPersonne($_POST);
 catch (Exception $e){
     echo $e->getMessage(),"\n";
 }
+
+$action = $_POST['action'];
+
+if($action === 'rdv'){
+
+
+    $patient = new Patient($_POST);
+}
+
+print_r($patient);
+
 ?>

@@ -3,18 +3,92 @@
 {% block title %}Hello RendezvousController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+  <div class="container">
+            <ul class="list-group list-group-horizontal">
+                <li>
+                    <a href="index.php" title="Page d'accueil">Accueil</a>
+                </li>
+                <li>
+                    Rendez-vous.
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 id="titreH1">Rendez-vous</h1>
+                    <p>Pour poser un rendez-vous, merci de sélectionner un mois, un jour et une heure puis renseigner le formulaire.</p>
+                    <p><span class="obj">(*)</span>: Champs obligatoire.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <h2><span class="badge badge-secondary">Etape 1</span></h2>
+                </div>
+                <div class="col-6">
+                    <form action="">
+                        <select class="custom-select" id="selectedM" required>
+                            <option value="1" selected>Janvier</option>
+                            <option value="2">Février</option>
+                            <option value="3">Mars</option>
+                            <option value="4">Avril</option>
+                            <option value="5">Mai</option>
+                            <option value="6">Juin</option>
+                            <option value="7">Juillet</option>
+                            <option value="8">Août</option>
+                            <option value="9">Septembre</option>
+                            <option value="10">Octobre</option>
+                            <option value="11" >Novembre</option>
+                            <option value="12">Décembre</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="col-3">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <h2><span class="badge badge-secondary">Etape 2</span></h2>
+                </div>
+                <div class="col-6">
+                    <?php include("includes/forms/date.php"); ?>
+                </div>
+                <div class="col-3">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/karu-consult.gp/src/Controller/RendezvousController.php'|file_link(0) }}">src/Controller/RendezvousController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/karu-consult.gp/templates/rendezvous/index.html.twig'|file_link(0) }}">templates/rendezvous/index.html.twig</a></code></li>
-    </ul>
-</div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <h2><span class="badge badge-secondary">Etape 3</span></h2>
+                </div>
+                <div class="col-6">
+                    <?php include("includes/forms/heure.php");  ?>
+                </div>
+                <div class="col-3">
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <h2><span class="badge badge-secondary">Etape 4</span></h2>
+                </div>
+                <div class="col-6">
+                    <?php
+                        include("includes/forms/patient.php");
+                    ?>
+                </div>
+                <div class="col-3">
+
+                </div>
+            </div>
+        </div>
 {% endblock %}
